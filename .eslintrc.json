@@ -2,16 +2,5 @@
   "rules": {
     "react/react-in-jsx-scope": "off"
   },
-  "extends": [
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "prettier/prettier": [
-    "error",
-    {
-      "endOfLine": "auto"
-    }
-  ]
+  "extends": ["next/core-web-vitals", "eslint:recommended", "plugin:react/recommended"]
 }

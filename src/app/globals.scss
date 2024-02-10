@@ -1,4 +1,4 @@
-@import 'styles/variables.scss';
+@import './../styles/variables.scss';
 
 * {
   box-sizing: border-box;
@@ -6,8 +6,7 @@
 
 body {
   margin: 0;
-  font-family:
-    sans-serif;
+  font-family: sans-serif;
   font-size: 16px;
   line-height: 21.79px;
   color: $Black;
@@ -22,6 +21,15 @@ ul {
   margin: 0;
 }
 
+h1 {
+  font-size: 64px;
+  line-height: normal;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: normal;
+}
 ul {
   list-style: none;
 }
@@ -30,15 +38,17 @@ a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   &:hover {
-    opacity: .5;
+    opacity: 0.7;
   }
 }
 
 button {
-  transition: opacity .3s;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
   &:hover {
-    opacity: .5;
+    opacity: 0.7;
   }
 }

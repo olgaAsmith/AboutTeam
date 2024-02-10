@@ -1,0 +1,72 @@
+@import './../../../styles/variables.scss';
+
+.signup {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+
+  &__form {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+    padding: 16px;
+    margin: auto;
+  }
+  &__title {
+    font-size: 20px;
+  }
+  &__inputarea {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  &__label {
+    margin-bottom: 8px;
+  }
+  &__input {
+    height: 48px;
+    padding: 12px 8px 12px 16px;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    background: $Gray_light;
+    margin-bottom: 4px;
+  }
+  &__input::placeholder {
+    color: $Gray;
+    font-size: 14px;
+    line-height: normal;
+  }
+  &__input_error {
+    border: 1px solid var(--Red, #ff6161);
+  }
+  &__error {
+    color: $Red;
+    font-size: 10px;
+    line-height: normal;
+  }
+  &__button {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background: $Violet;
+    color: $White;
+    font-size: 16px;
+    line-height: 21.79px;
+  }
+  &__hider {
+    position: absolute;
+    top: 42px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    background-image: url(../../../images/hide.svg);
+    cursor: pointer;
+  }
+}

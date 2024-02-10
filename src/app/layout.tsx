@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import './globals.scss';
+import React from 'react';
 
 const roboto = Roboto({
   weight: ['400'],
   style: ['normal'],
   subsets: ['cyrillic'],
-  display: 'swap',
-})
+  display: 'swap'
+});
 
 export const metadata: Metadata = {
   title: 'About Team',
