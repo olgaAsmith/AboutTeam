@@ -30,7 +30,6 @@ export default function SignUp() {
     return password === value || 'Пароли не совпадают';
   };
 
-  console.log(errors);
   return (
     <section className={styles.signup}>
       <form className={styles.signup__form} onSubmit={handleSubmit(onSubmit)}>
@@ -40,7 +39,7 @@ export default function SignUp() {
             Имя
           </label>
           <input
-            className={styles.signup__input}
+            className={`${styles.signup__input} ${errors.user ? styles.signup__input_error : ''}`}
             type="text"
             id="userName"
             placeholder="Артур"
@@ -63,7 +62,7 @@ export default function SignUp() {
             Электронная почта
           </label>
           <input
-            className={styles.signup__input}
+            className={`${styles.signup__input} ${errors.email ? styles.signup__input_error : ''}`}
             type="email"
             id="email"
             placeholder="example@mail.ru"
@@ -82,7 +81,7 @@ export default function SignUp() {
             Пароль
           </label>
           <input
-            className={styles.signup__input}
+            className={`${styles.signup__input} ${errors.password ? styles.signup__input_error : ''}`}
             type={isPasswordVisible ? 'text' : 'password'}
             id="password"
             placeholder="******"
@@ -108,7 +107,7 @@ export default function SignUp() {
             Подтвердите пароль
           </label>
           <input
-            className={styles.signup__input}
+            className={`${styles.signup__input} ${errors.confirmPassword ? styles.signup__input_error : ''}`}
             type={isPasswordVisible ? 'text' : 'password'}
             id="confirmPassword"
             placeholder="******"
