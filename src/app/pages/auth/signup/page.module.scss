@@ -1,5 +1,5 @@
-@import './../../../styles/variables.scss';
-@import './../../../styles/media.scss';
+@import './../../../../styles/variables.scss';
+@import './../../../../styles/media.scss';
 
 
 .signup {
@@ -71,7 +71,7 @@
     right: 8px;
     width: 24px;
     height: 24px;
-    background-image: url(../../../images/hide.svg);
+    background-image: url(../../../../images/hide.svg);
     cursor: pointer;
   }
 }

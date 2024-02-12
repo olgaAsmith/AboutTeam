@@ -1,0 +1,65 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/media.scss';
+
+.header {
+  position: relative;
+  width: 100%;
+  min-height: 265px;
+  background-color: $Violet;
+  padding: 32px 0 64px;
+  &__menu {
+    width: calc(100% - 160px);
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+  }
+
+  &__button {
+    width: 81px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid $Gray_light;
+    background-color: transparent;
+    color: $Gray_light;
+    font-size: 16px;
+    line-height: 21.79px;
+  }
+  &__button_logout {
+    width: 40px;
+    height: 40px;
+    background-image: url(../../../images/exit.svg);
+  }
+  &__button_back {
+    width: 40px;
+    height: 40px;
+    background-image: url(../../../images/back.svg);
+  }
+  &__describe {
+    width: 848px;
+    margin: auto;
+    color: $White;
+    @include desktop {
+      width: 480px;
+    }
+    @include tablet {
+      width: 400px;
+    }
+    @include phone {
+      width: 334px;
+    }
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 16px;
+    @include phone {
+      font-size: 36px;
+    }
+  }
+  &__subtitle {
+    text-align: center;
+    @include phone {
+      font-size: 16px;
+    }
+  }
+}

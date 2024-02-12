@@ -3,6 +3,7 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import styles from './page.module.scss';
 import { useState } from 'react';
+import Layout from '@/app/layout';
 interface SignUpData {
   user: string;
   email: string;
