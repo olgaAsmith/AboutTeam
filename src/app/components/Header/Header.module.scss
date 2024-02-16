@@ -26,8 +26,6 @@
     border: 1px solid $Gray_light;
     background-color: transparent;
     color: $Gray_light;
-    font-size: 16px;
-    line-height: 21.79px;
     @include tablet {
       background-image: url(../../../images/exit.svg);
       width: 40px;
@@ -37,6 +35,10 @@
     }
   }
   &__button_back {
+    opacity: 0;
+    &_visible {
+      opacity: 1;
+    }
     @include tablet {
       background-image: url(../../../images/back.svg);
       width: 40px;
@@ -61,6 +63,47 @@
     text-align: center;
     @include tablet {
       font-size: 16px;
+    }
+  }
+}
+
+.person {
+  display: flex;
+  width: 78%;
+  @include desktop {
+    width: auto;
+    flex-direction: column;
+  }
+  @include tablet {
+    flex-direction: column;
+    text-align: center;
+  }
+  &__photo {
+    border-radius: 50%;
+    @include tablet {
+      margin: 16px auto 0;
+      order: 2;
+    }
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 29px 0 29px 32px;
+    color: $White;
+    @include tablet {
+      margin: 40px 0 0 0;
+      order: 1;
+    }
+  }
+  &__name {
+    @include tablet {
+      font-size: 36px;
+    }
+  }
+  &__job {
+    @include tablet {
+      font-size: 20px;
     }
   }
 }

@@ -1,30 +1,75 @@
 import { useAppDispatch } from '@/lib/hooks';
 import styles from './Header.module.scss';
 import { logoutUser } from '@/lib/features/auth';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function Header() {
-
-
+  const [isPageAbout, setIsPageAbout] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
-
   const router = useRouter();
+  const currentPath = usePathname();
 
-  const logout = async () => {
+  useEffect(() => {
+    const getData = async () => {
+      const pathPattern = /^\/pages\/about\/\d+$/;
+      setIsPageAbout(pathPattern.test(currentPath));
+      setIsLoading(false);
+    };
+    getData();
+  }, [currentPath]);
+
+  const handleClickBack = () => {
+    router.back();
+  };
+
+  const handleLogout = () => {
     dispatch(logoutUser());
     router.push('/pages/auth/signup');
   };
-  
+
+  if (isLoading) {
+    return <></>;
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.header__menu}>
-        <button className={`${styles.header__button} ${styles.header__button_back}`}>Назад</button>
-        <button onClick={logout} className={styles.header__button}>Выход</button>
+        <button
+          onClick={handleClickBack}
+          className={`${styles.header__button} ${styles.header__button_back} ${isPageAbout ? styles.header__button_back_visible : ''}`}>
+          Назад
+        </button>
+        {isPageAbout ? (
+          <div className={styles.person}>
+            <Image alt="" className={styles.person__photo} width={187} height={187} />
+            <div className={styles.person__info}>
+              <h1 className={styles.person__name}>Артур Королёв</h1>
+              <h2 className={styles.person__job}>Партнер</h2>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+
+        <button onClick={handleLogout} className={styles.header__button}>
+          Выход
+        </button>
       </div>
-      <div className={styles.header__describe}>
-        <h1 className={styles.header__title}>Наша команда</h1>
-        <h2 className={styles.header__subtitle}>Это опытные специалисты, хорошо разбирающиеся во всех задачах, которые ложатся на их плечи, и умеющие находить выход из любых, даже самых сложных ситуаций. </h2>
-      </div>
+
+      {isPageAbout ? (
+        ''
+      ) : (
+        <div className={styles.header__describe}>
+          <h1 className={styles.header__title}>Наша команда</h1>
+          <h2 className={styles.header__subtitle}>
+            Это опытные специалисты, хорошо разбирающиеся во всех задачах, которые ложатся на их
+            плечи, и умеющие находить выход из любых, даже самых сложных ситуаций.
+          </h2>
+        </div>
+      )}
     </header>
   );
 }

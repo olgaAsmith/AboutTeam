@@ -1,0 +1,47 @@
+@import '../../../../styles/media.scss';
+
+.about {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% - 376px);
+  margin: 50px auto;
+  @include desktop {
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  &__description {
+    width: 65%;
+    @include desktop {
+      width: 100%;
+      order: 2;
+    }
+  }
+  &__contacts {
+    width: 188px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    @include desktop {
+      width: 100%;
+      order: 1;
+    }
+  }
+  &__contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &__image {
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    &_tel {
+      background-image: url(../../../../images/phone.svg);
+    }
+    &_email {
+      background-image: url(../../../../images/mail.svg);
+    }
+  }
+}

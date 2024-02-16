@@ -35,16 +35,18 @@ export default function Home() {
   }, [windowSize]);
 
   return (
-    <main className={styles.main}>
+    <>
       <Header></Header>
-      <section className={styles.content}>
-        <ul className={styles.content__list}>
-          <Card userNumbers={userNumbers}></Card>
-        </ul>
-        <button className={styles.content__button} onClick={handleClick}>
-          Показать еще <div className={styles.content__arrow}></div>
-        </button>
-      </section>
-    </main>
+      <main className={styles.main}>
+        <section className={styles.content}>
+          <ul className={styles.content__list}>
+            <Card userNumbers={userNumbers}></Card>
+          </ul>
+          <button className={styles.content__button} onClick={handleClick}>
+            Показать еще <div className={styles.content__arrow}></div>
+          </button>
+        </section>
+      </main>
+    </>
   );
 }
