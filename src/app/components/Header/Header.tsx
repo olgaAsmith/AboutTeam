@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.header__menu}>
-        <button className={styles.header__button}>Назад</button>
+        <button className={`${styles.header__button} ${styles.header__button_back}`}>Назад</button>
         <button onClick={logout} className={styles.header__button}>Выход</button>
       </div>
       <div className={styles.header__describe}>
