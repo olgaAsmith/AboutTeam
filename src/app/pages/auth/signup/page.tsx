@@ -3,7 +3,8 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import styles from './page.module.scss';
 import { useState } from 'react';
-import Layout from '@/app/layout';
+import { useAppDispatch } from '@/lib/hooks';
+import { registerUser } from '@/lib/features/auth';
 interface SignUpData {
   user: string;
   email: string;
@@ -11,7 +12,11 @@ interface SignUpData {
   confirmPassword: string;
 }
 
+
 export default function SignUp() {
+
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -19,7 +24,7 @@ export default function SignUp() {
     formState: { errors }
   } = useForm<SignUpData>();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = (data) =>  dispatch(registerUser({ username: data.user, password: data.password }));
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const handlePasswordVisability = () => {

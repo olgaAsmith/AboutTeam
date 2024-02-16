@@ -1,11 +1,25 @@
+import { useAppDispatch } from '@/lib/hooks';
 import styles from './Header.module.scss';
+import { logoutUser } from '@/lib/features/auth';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
+
+
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
+  const logout = async () => {
+    dispatch(logoutUser());
+    router.push('/pages/auth/signup');
+  };
+  
   return (
     <header className={styles.header}>
       <div className={styles.header__menu}>
         <button className={styles.header__button}>Назад</button>
-        <button className={styles.header__button}>Выход</button>
+        <button onClick={logout} className={styles.header__button}>Выход</button>
       </div>
       <div className={styles.header__describe}>
         <h1 className={styles.header__title}>Наша команда</h1>
