@@ -4,8 +4,13 @@ import { logout } from '@/lib/features/auth';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import avatar from './../../../images/default_logo.jpg';
 
-export default function Header() {
+export default function Header({ userFirstName, userLastName, userAvatar }: {
+  userFirstName?: string;
+  userLastName?: string;
+  userAvatar?: string;
+}) {
   const [isPageAbout, setIsPageAbout] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -46,9 +51,9 @@ export default function Header() {
         </button>
         {isPageAbout ? (
           <div className={styles.person}>
-            <Image alt="" className={styles.person__photo} width={187} height={187} />
+            <Image src={userAvatar || avatar} alt={`${userFirstName} ${userLastName}`} className={styles.person__photo} width={187} height={187} />
             <div className={styles.person__info}>
-              <h1 className={styles.person__name}>Артур Королёв</h1>
+              <h1 className={styles.person__name}>{userFirstName} {userLastName}</h1>
               <h2 className={styles.person__job}>Партнер</h2>
             </div>
           </div>

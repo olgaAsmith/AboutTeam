@@ -1,11 +1,23 @@
 'use client';
 import Header from '@/app/components/Header/Header';
 import styles from './page.module.scss';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { useEffect } from 'react';
+import { fetchApiUsers } from '@/lib/features/userList';
 
-export default function About() {
+export default function About({ params }: { params: { id: string } }) {
+  const dispatch = useAppDispatch();
+  const apiListData = useAppSelector((state) => state.userList.usersData);
+
+  useEffect(() => {
+    dispatch(fetchApiUsers());
+  }, [dispatch]);
+
+  const user = apiListData.find((card) => card.id === parseInt(params.id));
+
   return (
     <>
-      <Header></Header>
+      <Header userFirstName={user?.first_name} userLastName={user?.last_name} userAvatar={user?.avatar}></Header>
       <main className={styles.main}>
         <section className={styles.about}>
           <p className={styles.about__description}>
@@ -26,11 +38,11 @@ export default function About() {
           <div className={styles.about__contacts}>
             <div className={styles.about__contact}>
               <div className={`${styles.about__image} ${styles.about__image_tel}`}></div>
-              <p className={styles.about__call}>+7 (954) 333-44-55</p>
+              <p className={styles.about__call}>{user?.email}</p>
             </div>
             <div className={styles.about__contact}>
               <div className={`${styles.about__image} ${styles.about__image_email}`}></div>
-              <p className={styles.about__email}>sykfafkar@gmail.com</p>
+              <p className={styles.about__email}>{user?.email}</p>
             </div>
           </div>
         </section>
