@@ -1,6 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const initialState = {
+interface AppState {
+  usersData: UserData[];
+}
+
+interface UserData {
+  id: number,
+  avatar: string,
+  first_name: string,
+  last_name: string,
+
+}
+
+const initialState: AppState = {
   usersData: []
 };
 
@@ -15,7 +27,7 @@ const slice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchApiUsers.fulfilled, (state, action) => {
-      state.usersData = action.payload;
+      state.usersData = action.payload.data;
     });
   }
 });

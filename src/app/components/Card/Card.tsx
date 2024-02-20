@@ -11,15 +11,10 @@ interface CardProps {
    */
   userNumbers: number;
 }
-type RootState = {
-  userList: {
-    usersData: any;
-  };
-};
 
 const Card: FC<CardProps> = (props) => {
   const dispatch = useAppDispatch();
-  const apiListData = useAppSelector((state: RootState) => state.userList.usersData.data);
+  const apiListData = useAppSelector((state) => state.userList.usersData);
 
   useEffect(() => {
     dispatch(fetchApiUsers());
