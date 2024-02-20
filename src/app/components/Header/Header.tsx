@@ -40,7 +40,8 @@ export default function Header() {
       <div className={styles.header__menu}>
         <button
           onClick={handleClickBack}
-          className={`${styles.header__button} ${styles.header__button_back} ${isPageAbout ? styles.header__button_back_visible : ''}`}>
+          className={`${styles.header__button} ${styles.header__button_back} ${isPageAbout ? styles.header__button_back_visible : ''}`}
+        >
           Назад
         </button>
         {isPageAbout ? (

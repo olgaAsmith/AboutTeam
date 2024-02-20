@@ -6,7 +6,7 @@ export const makeStore = () => {
   return configureStore({
     reducer: {
       userList: users,
-      auth: authReducer,
+      auth: authReducer
     }
   });
 };

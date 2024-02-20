@@ -14,7 +14,6 @@ interface SignUpData {
 }
 
 export default function SignUp() {
-  
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { isLogin } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();

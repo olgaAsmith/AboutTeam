@@ -5,11 +5,10 @@ interface AppState {
 }
 
 interface UserData {
-  id: number,
-  avatar: string,
-  first_name: string,
-  last_name: string,
-
+  id: number;
+  avatar: string;
+  first_name: string;
+  last_name: string;
 }
 
 const initialState: AppState = {
