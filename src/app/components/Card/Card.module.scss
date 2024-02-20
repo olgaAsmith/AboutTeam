@@ -6,7 +6,11 @@
   padding: 36px 80px 64px;
   border-radius: 10px;
   box-shadow: 0px 0.996px 3.984px 0px rgba(51, 51, 51, 0.15);
-
+  cursor: pointer;
+  transition: box-shadow .4s;
+  &:hover {
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
+  }
   &__content {
     display: flex;
     flex-direction: column;
@@ -26,8 +30,9 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    transition: opacity 0.3s;
+    transition: opacity .4s, scale .4s;
     &:hover {
+      scale: 1.5;
       opacity: 0.7;
     }
     &_active {
