@@ -2,9 +2,10 @@
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import styles from './page.module.scss';
-import { useState } from 'react';
-import { useAppDispatch } from '@/lib/hooks';
-import { registerUser } from '@/lib/features/auth';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { login } from '@/lib/features/auth';
+import { useRouter } from 'next/navigation';
 interface SignUpData {
   user: string;
   email: string;
@@ -12,10 +13,12 @@ interface SignUpData {
   confirmPassword: string;
 }
 
-
 export default function SignUp() {
-
+  
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const { isLogin } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const {
     register,
@@ -24,16 +27,23 @@ export default function SignUp() {
     formState: { errors }
   } = useForm<SignUpData>();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) =>  dispatch(registerUser({ username: data.user, password: data.password }));
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    dispatch(login(data.userName));
+  };
 
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  useEffect(() => {
+    if (isLogin) {
+      router.push('/');
+    }
+  }, [isLogin, router]);
+
   const handlePasswordVisability = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
   const matchPassword = (value: string) => {
     const password = getValues('password');
-    return password === value || 'Пароли не совпадают';
+    return password === value || 'Пароли должны совпадать';
   };
 
   return (

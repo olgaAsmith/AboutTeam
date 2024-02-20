@@ -1,6 +1,6 @@
 import { useAppDispatch } from '@/lib/hooks';
 import styles from './Header.module.scss';
-import { logoutUser } from '@/lib/features/auth';
+import { logout } from '@/lib/features/auth';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -8,10 +8,11 @@ import Image from 'next/image';
 export default function Header() {
   const [isPageAbout, setIsPageAbout] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const dispatch = useAppDispatch();
   const router = useRouter();
   const currentPath = usePathname();
+  const dispatch = useAppDispatch();
 
+  //*makes header invis while loading on "about" pages
   useEffect(() => {
     const getData = async () => {
       const pathPattern = /^\/pages\/about\/\d+$/;
@@ -26,7 +27,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    dispatch(logout());
     router.push('/pages/auth/signup');
   };
 

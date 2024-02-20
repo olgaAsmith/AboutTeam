@@ -3,19 +3,28 @@ import { useEffect, useState } from 'react';
 import Card from './components/Card/Card';
 import Header from './components/Header/Header';
 import styles from './page.module.scss';
+import { useAppSelector } from '@/lib/hooks';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [userNumbers, setUserNumbers] = useState(4);
   const [windowSize, setWindowSize] = useState(0);
+  const { isLogin } = useAppSelector((state) => state.auth);
+  const router = useRouter();
 
+  useEffect(() => {
+    if (!isLogin) {
+      router.push('/pages/auth/signup');
+    }
+  }, [isLogin, router]);
+
+  //* handle amount cards by diff screen size
   const handleClick = () => {
     setUserNumbers(userNumbers + 4);
   };
-
   useEffect(() => {
     setWindowSize(window.innerWidth);
   }, []);
-
   useEffect(() => {
     const windowSize = () => {
       setWindowSize(window.innerWidth);
@@ -25,7 +34,6 @@ export default function Home() {
       window.removeEventListener('resize', windowSize);
     };
   }, []);
-
   useEffect(() => {
     if (windowSize < 1115) {
       setUserNumbers(4);

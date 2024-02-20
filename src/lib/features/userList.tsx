@@ -9,7 +9,7 @@ export const fetchApiUsers = createAsyncThunk('fetchApiUsers', async () => {
   return result.json();
 });
 
-const Slice = createSlice({
+const slice = createSlice({
   name: 'usersSlice',
   initialState,
   reducers: {},
@@ -20,4 +20,4 @@ const Slice = createSlice({
   }
 });
 
-export default Slice.reducer;
+export default slice.reducer;

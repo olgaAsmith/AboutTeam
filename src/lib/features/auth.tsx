@@ -1,50 +1,22 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-interface User {
-  username: string;
-}
-
-interface Auth {
-  user: User | null;
-  error: string | null;
-}
-
-const initialState: Auth = {
-  user: null,
-  error: null
-};
-
-
-export const registerUser = createAsyncThunk(
-  'auth/registerUser',
-  async (newUser: { username: string; password: string }) => {
-    const user: User = { ...newUser };
-    console.log(user);
-    localStorage.setItem('user', JSON.stringify(user));
-    return user;
-  }
-);
-
-export const checkUserInLocalStorage = createAsyncThunk('auth/checkUserInLocalStorage', () => {
-  const user = localStorage.getItem('user');
-  return !!user;
-});
-
-const authSlice = createSlice({
+const auth = createSlice({
   name: 'auth',
-  initialState,
-  reducers: {
-    logoutUser: (state) => {
-      state.user = null;
-      localStorage.removeItem('user');
-    }
+  initialState: {
+    isLogin: false,
+    username: '',
   },
-  extraReducers: (builder) => {
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.user = action.payload;
-    });
-  }
+  reducers: {
+    login: (state, action) => {
+      state.isLogin = true;
+      state.username = action.payload;
+    },
+    logout: (state) => {
+      state.isLogin = false;
+      state.username = '';
+    },
+  },
 });
 
-export const { logoutUser } = authSlice.actions;
-export default authSlice.reducer;
+export const { login, logout } = auth.actions;
+export default auth.reducer;
