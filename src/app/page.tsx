@@ -12,9 +12,9 @@ export default function Home() {
   const [windowSize, setWindowSize] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isButtonExist, setIsButtonExist] = useState(true);
-  
+
   const router = useRouter();
-  
+
   const dispatch = useAppDispatch();
   const { isLogin } = useAppSelector((state) => state.auth);
   const apiListData = useAppSelector((state) => state.userList.usersData);

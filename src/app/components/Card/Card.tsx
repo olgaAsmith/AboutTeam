@@ -14,9 +14,8 @@ interface CardProps {
 }
 
 const Card: FC<CardProps> = (props) => {
-
   const [likedCards, setLikedCards] = useState<{ [id: number]: boolean }>({});
-  
+
   const dispatch = useAppDispatch();
   const apiListData = useAppSelector((state) => state.userList.usersData);
   const route = useRouter();
@@ -26,21 +25,21 @@ const Card: FC<CardProps> = (props) => {
   }, [dispatch]);
 
   const handleOpenCard = (id: number) => {
-    route.push(`/pages/about/${id}`)
-};
+    route.push(`/pages/about/${id}`);
+  };
 
-const handleAddFavorite = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: number) => {
-  e.stopPropagation()
-  setLikedCards((likedCards) => ({
-    ...likedCards,
-    [id]: !likedCards[id],
-  }));
-}
+  const handleAddFavorite = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: number) => {
+    e.stopPropagation();
+    setLikedCards((likedCards) => ({
+      ...likedCards,
+      [id]: !likedCards[id]
+    }));
+  };
   return (
     <>
       {apiListData &&
         apiListData.slice(0, props.userNumbers).map((item) => (
-          <div key={item.id} className={styles.card} onClick={()=>handleOpenCard(item.id)}>
+          <div key={item.id} className={styles.card} onClick={() => handleOpenCard(item.id)}>
             <div className={styles.card__content}>
               <Image
                 src={item.avatar}
@@ -52,7 +51,10 @@ const handleAddFavorite = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: 
               <h2 className={styles.card__name}>
                 {item.first_name} {item.last_name}
               </h2>
-              <div onClick={(e) => handleAddFavorite(e, item.id)} className={`${styles.card__favorite} ${likedCards[item.id] ? styles.card__favorite_active : ''}`}></div>
+              <div
+                onClick={(e) => handleAddFavorite(e, item.id)}
+                className={`${styles.card__favorite} ${likedCards[item.id] ? styles.card__favorite_active : ''}`}
+              ></div>
             </div>
           </div>
         ))}

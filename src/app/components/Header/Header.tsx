@@ -6,7 +6,11 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import avatar from './../../../images/default_logo.jpg';
 
-export default function Header({ userFirstName, userLastName, userAvatar }: {
+export default function Header({
+  userFirstName,
+  userLastName,
+  userAvatar
+}: {
   userFirstName?: string;
   userLastName?: string;
   userAvatar?: string;
@@ -51,9 +55,17 @@ export default function Header({ userFirstName, userLastName, userAvatar }: {
         </button>
         {isPageAbout ? (
           <div className={styles.person}>
-            <Image src={userAvatar || avatar} alt={`${userFirstName} ${userLastName}`} className={styles.person__photo} width={187} height={187} />
+            <Image
+              src={userAvatar || avatar}
+              alt={`${userFirstName} ${userLastName}`}
+              className={styles.person__photo}
+              width={187}
+              height={187}
+            />
             <div className={styles.person__info}>
-              <h1 className={styles.person__name}>{userFirstName} {userLastName}</h1>
+              <h1 className={styles.person__name}>
+                {userFirstName} {userLastName}
+              </h1>
               <h2 className={styles.person__job}>Партнер</h2>
             </div>
           </div>
