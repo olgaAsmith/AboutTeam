@@ -3,15 +3,39 @@ import { useEffect, useState } from 'react';
 import Card from './components/Card/Card';
 import Header from './components/Header/Header';
 import styles from './page.module.scss';
-import { useAppSelector } from '@/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
+import { fetchApiUsers } from '@/lib/features/userList';
 
 export default function Home() {
   const [userNumbers, setUserNumbers] = useState(4);
   const [windowSize, setWindowSize] = useState(0);
-  const { isLogin } = useAppSelector((state) => state.auth);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isButtonExist, setIsButtonExist] = useState(true);
+  
   const router = useRouter();
+  
+  const dispatch = useAppDispatch();
+  const { isLogin } = useAppSelector((state) => state.auth);
+  const apiListData = useAppSelector((state) => state.userList.usersData);
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchApiUsers());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (apiListData.length <= userNumbers) {
+      setIsButtonExist(false);
+    } else {
+      setIsButtonExist(true);
+    }
+  }, [apiListData.length, userNumbers]);
+
+  //* show "more button"
   useEffect(() => {
     if (!isLogin) {
       router.push('/pages/auth/signup');
@@ -45,16 +69,24 @@ export default function Home() {
   return (
     <>
       <Header></Header>
-      <main className={styles.main}>
-        <section className={styles.content}>
-          <ul className={styles.content__list}>
-            <Card userNumbers={userNumbers}></Card>
-          </ul>
-          <button className={styles.content__button} onClick={handleClick}>
-            Показать еще <div className={styles.content__arrow}></div>
-          </button>
-        </section>
-      </main>
+      {isLoading ? (
+        ''
+      ) : (
+        <main className={styles.main}>
+          <section className={styles.content}>
+            <ul className={styles.content__list}>
+              <Card userNumbers={userNumbers}></Card>
+            </ul>
+            {isButtonExist ? (
+              <button className={styles.content__button} onClick={handleClick}>
+                Показать еще <div className={styles.content__arrow}></div>
+              </button>
+            ) : (
+              ''
+            )}
+          </section>
+        </main>
+      )}
     </>
   );
 }
