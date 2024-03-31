@@ -12,16 +12,12 @@ export default function Home() {
   const [windowSize, setWindowSize] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isButtonExist, setIsButtonExist] = useState(true);
-  
+
   const router = useRouter();
-  
+
   const dispatch = useAppDispatch();
   const { isLogin } = useAppSelector((state) => state.auth);
   const apiListData = useAppSelector((state) => state.userList.usersData);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
 
   useEffect(() => {
     dispatch(fetchApiUsers());
@@ -35,9 +31,10 @@ export default function Home() {
     }
   }, [apiListData.length, userNumbers]);
 
-  //* show "more button"
   useEffect(() => {
-    if (!isLogin) {
+    if (isLogin) {
+      setIsLoading(false);
+    } else {
       router.push('/pages/auth/signup');
     }
   }, [isLogin, router]);
@@ -68,24 +65,24 @@ export default function Home() {
 
   return (
     <>
-      <Header></Header>
       {isLoading ? (
         ''
       ) : (
-        <main className={styles.main}>
-          <section className={styles.content}>
-            <ul className={styles.content__list}>
-              <Card userNumbers={userNumbers}></Card>
-            </ul>
-            {isButtonExist ? (
-              <button className={styles.content__button} onClick={handleClick}>
-                Показать еще <div className={styles.content__arrow}></div>
-              </button>
-            ) : (
-              ''
-            )}
-          </section>
-        </main>
+        <>
+          <Header />
+          <main className={styles.main}>
+            <section className={styles.content}>
+              <ul className={styles.content__list}>
+                <Card userNumbers={userNumbers} />
+              </ul>
+              {isButtonExist && (
+                <button className={styles.content__button} onClick={handleClick}>
+                  Показать еще <div className={styles.content__arrow}></div>
+                </button>
+              )}
+            </section>
+          </main>
+        </>
       )}
     </>
   );
